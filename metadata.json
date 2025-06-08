@@ -1,0 +1,8 @@
+{
+    "authors": ["@manuelschneid3r"],
+    "description": "Control the app",
+    "license": "MIT",
+    "name": "Albert",
+    "plugin_dependencies": ["applications"],
+    "url": "https://github.com/albertlauncher/albert-plugin-albert"
+}
