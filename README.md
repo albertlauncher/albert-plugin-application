@@ -2,7 +2,8 @@
 
 ## Features
 
-Provides application related items. Currently:
+Provides application related items:
+
   - Settings
   - Quit
   - Restart

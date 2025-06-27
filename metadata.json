@@ -4,5 +4,6 @@
     "license": "MIT",
     "name": "Albert",
     "plugin_dependencies": ["applications"],
-    "url": "https://github.com/albertlauncher/albert-plugin-albert"
+    "url": "https://github.com/albertlauncher/albert-plugin-albert",
+    "readme_url": "https://github.com/albertlauncher/albert-plugin-albert/blob/main/README.md"
 }
