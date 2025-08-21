@@ -5,6 +5,6 @@
     "maintainers": ["@manuelschneid3r"],
     "name": "Albert",
     "plugin_dependencies": ["applications"],
-    "url": "https://github.com/albertlauncher/albert-plugin-albert",
-    "readme_url": "https://github.com/albertlauncher/albert-plugin-albert/blob/main/README.md"
+    "url": "https://github.com/albertlauncher/albert-plugin-application",
+    "readme_url": "https://github.com/albertlauncher/albert-plugin-application/blob/main/README.md"
 }
