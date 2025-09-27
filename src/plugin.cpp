@@ -89,7 +89,8 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
                                                             strings.cache,
                                                             strings.cached,
                                                             makeIcon,
-                                                            actions),
+                                                            actions,
+                                                            buildPath(albert::cacheLocation())),
                                          m);
     }
 
@@ -104,7 +105,8 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
                                                             strings.config,
                                                             strings.configd,
                                                             makeIcon,
-                                                            actions),
+                                                            actions,
+                                                            buildPath(albert::configLocation())),
                                          m);
     }
 
@@ -119,7 +121,8 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
                                                             strings.data,
                                                             strings.datad,
                                                             makeIcon,
-                                                            actions),
+                                                            actions,
+                                                            buildPath(albert::dataLocation())),
                                          m);
     }
 
