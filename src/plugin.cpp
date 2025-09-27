@@ -3,6 +3,7 @@
 #include "plugin.h"
 #include <albert/albert.h>
 #include <albert/albert.h>
+#include <albert/iconutil.h>
 #include <albert/logging.h>
 #include <albert/matcher.h>
 #include <albert/standarditem.h>
@@ -36,9 +37,13 @@ Plugin::Plugin():
 void Plugin::openTermAt(const std::filesystem::path &loc) const
 { apps_plugin->runTerminal("cd '%1'; exec $SHELL"_L1.arg(QString::fromLocal8Bit(loc.c_str()))); }
 
+static inline auto makeIcon() { return makeThemeIcon(u"albert"_s); }
+
+static inline auto buildPath(const filesystem::path path)
+{ return QString::fromLocal8Bit(path.native()) + u"/"_s; }
+
 vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
 {
-    static const QStringList icon_urls{":app_icon"_L1};
     Matcher matcher(query.string());
     vector<RankItem> rank_items;
     Match m;
@@ -47,7 +52,7 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
         rank_items.emplace_back(StandardItem::make(u"sett"_s,
                                                    strings.settings,
                                                    strings.settingsd,
-                                                   icon_urls,
+                                                   makeIcon,
                                                    {{"open"_L1,
                                                      strings.open,
                                                      [] { showSettings(); }}}),
@@ -57,7 +62,7 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
         rank_items.emplace_back(StandardItem::make(u"quit"_s,
                                                    strings.quit,
                                                    strings.quitd,
-                                                   icon_urls,
+                                                   makeIcon,
                                                    {{"quit"_L1,
                                                      strings.quit,
                                                      [] { quit(); }}}),
@@ -67,7 +72,7 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
         rank_items.emplace_back(StandardItem::make(u"restart"_s,
                                                    strings.restart,
                                                    strings.restartd,
-                                                   icon_urls,
+                                                   makeIcon,
                                                    {{"restart"_L1,
                                                      strings.restart,
                                                      [] { restart(); }}}),
@@ -83,7 +88,7 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
         auto i = rank_items.emplace_back(StandardItem::make(u"cache"_s,
                                                             strings.cache,
                                                             strings.cached,
-                                                            icon_urls,
+                                                            makeIcon,
                                                             actions),
                                          m);
     }
@@ -98,7 +103,7 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
         auto i = rank_items.emplace_back(StandardItem::make(u"config"_s,
                                                             strings.config,
                                                             strings.configd,
-                                                            icon_urls,
+                                                            makeIcon,
                                                             actions),
                                          m);
     }
@@ -113,7 +118,7 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
         auto i = rank_items.emplace_back(StandardItem::make(u"data"_s,
                                                             strings.data,
                                                             strings.datad,
-                                                            icon_urls,
+                                                            makeIcon,
                                                             actions),
                                          m);
     }
