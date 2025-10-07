@@ -85,13 +85,13 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
             actions.emplace_back("term"_L1, strings.topen,
                                  [this]{ openTermAt(albert::cacheLocation()); });
 
-        auto i = rank_items.emplace_back(StandardItem::make(u"cache"_s,
-                                                            strings.cache,
-                                                            strings.cached,
-                                                            makeIcon,
-                                                            actions,
-                                                            buildPath(albert::cacheLocation())),
-                                         m);
+        rank_items.emplace_back(StandardItem::make(u"cache"_s,
+                                                   strings.cache,
+                                                   strings.cached,
+                                                   makeIcon,
+                                                   actions,
+                                                   buildPath(albert::cacheLocation())),
+                                m);
     }
 
     if (m = matcher.match(strings.config); m)
@@ -101,13 +101,13 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
             actions.emplace_back("term"_L1, strings.topen,
                                  [this]{ openTermAt(albert::configLocation()); });
 
-        auto i = rank_items.emplace_back(StandardItem::make(u"config"_s,
-                                                            strings.config,
-                                                            strings.configd,
-                                                            makeIcon,
-                                                            actions,
-                                                            buildPath(albert::configLocation())),
-                                         m);
+        rank_items.emplace_back(StandardItem::make(u"config"_s,
+                                                   strings.config,
+                                                   strings.configd,
+                                                   makeIcon,
+                                                   actions,
+                                                   buildPath(albert::configLocation())),
+                                m);
     }
 
     if (m = matcher.match(strings.data); m)
@@ -117,13 +117,13 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
             actions.emplace_back("term"_L1, strings.topen,
                                  [this]{ openTermAt(albert::dataLocation()); });
 
-        auto i = rank_items.emplace_back(StandardItem::make(u"data"_s,
-                                                            strings.data,
-                                                            strings.datad,
-                                                            makeIcon,
-                                                            actions,
-                                                            buildPath(albert::dataLocation())),
-                                         m);
+        rank_items.emplace_back(StandardItem::make(u"data"_s,
+                                                   strings.data,
+                                                   strings.datad,
+                                                   makeIcon,
+                                                   actions,
+                                                   buildPath(albert::dataLocation())),
+                                m);
     }
 
     return rank_items;
