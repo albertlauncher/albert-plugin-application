@@ -1,8 +1,7 @@
 // Copyright (c) 2025 Manuel Schneider
 
 #include "plugin.h"
-#include <albert/albert.h>
-#include <albert/albert.h>
+#include <albert/app.h>
 #include <albert/iconutil.h>
 #include <albert/logging.h>
 #include <albert/matcher.h>
@@ -10,7 +9,6 @@
 #include <albert/systemutil.h>
 ALBERT_LOGGING_CATEGORY("albert")
 using namespace Qt::Literals;
-using namespace albert::util;
 using namespace albert;
 using namespace std;
 
@@ -42,9 +40,9 @@ static inline auto makeIcon() { return makeThemeIcon(u"albert"_s); }
 static inline auto buildPath(const filesystem::path path)
 { return QString::fromLocal8Bit(path.native()) + u"/"_s; }
 
-vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
+vector<RankItem> Plugin::rankItems(QueryContext &ctx)
 {
-    Matcher matcher(query.string());
+    Matcher matcher(ctx);
     vector<RankItem> rank_items;
     Match m;
 
@@ -55,7 +53,7 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
                                                    makeIcon,
                                                    {{"open"_L1,
                                                      strings.open,
-                                                     [] { showSettings(); }}}),
+                                                     [] { App::instance().showSettings(); }}}),
                                 m);
 
     if (m = matcher.match(strings.quit); m)
@@ -65,7 +63,7 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
                                                    makeIcon,
                                                    {{"quit"_L1,
                                                      strings.quit,
-                                                     [] { quit(); }}}),
+                                                     [] { App::quit(); }}}),
                                 m);
 
     if (m = matcher.match(strings.restart); m)
@@ -75,54 +73,54 @@ vector<RankItem> Plugin::handleGlobalQuery(const Query &query)
                                                    makeIcon,
                                                    {{"restart"_L1,
                                                      strings.restart,
-                                                     [] { restart(); }}}),
+                                                     [] { App::restart(); }}}),
                                 m);
 
     if (m = matcher.match(strings.cache); m)
     {
-        vector<Action> actions = {{"open"_L1, strings.open, [] { open(albert::cacheLocation()); }}};
+        vector<Action> actions = {{"open"_L1, strings.open, [] { open(App::cacheLocation()); }}};
         if (apps_plugin)
             actions.emplace_back("term"_L1, strings.topen,
-                                 [this]{ openTermAt(albert::cacheLocation()); });
+                                 [this]{ openTermAt(App::cacheLocation()); });
 
         rank_items.emplace_back(StandardItem::make(u"cache"_s,
                                                    strings.cache,
                                                    strings.cached,
                                                    makeIcon,
                                                    actions,
-                                                   buildPath(albert::cacheLocation())),
+                                                   buildPath(App::cacheLocation())),
                                 m);
     }
 
     if (m = matcher.match(strings.config); m)
     {
-        vector<Action> actions = {{"open"_L1, strings.open, [] { open(albert::configLocation()); }}};
+        vector<Action> actions = {{"open"_L1, strings.open, [] { open(App::configLocation()); }}};
         if (apps_plugin)
             actions.emplace_back("term"_L1, strings.topen,
-                                 [this]{ openTermAt(albert::configLocation()); });
+                                 [this]{ openTermAt(App::configLocation()); });
 
         rank_items.emplace_back(StandardItem::make(u"config"_s,
                                                    strings.config,
                                                    strings.configd,
                                                    makeIcon,
                                                    actions,
-                                                   buildPath(albert::configLocation())),
+                                                   buildPath(App::configLocation())),
                                 m);
     }
 
     if (m = matcher.match(strings.data); m)
     {
-        vector<Action> actions = {{"open"_L1, strings.open, [] { open(albert::dataLocation()); }}};
+        vector<Action> actions = {{"open"_L1, strings.open, [] { open(App::dataLocation()); }}};
         if (apps_plugin)
             actions.emplace_back("term"_L1, strings.topen,
-                                 [this]{ openTermAt(albert::dataLocation()); });
+                                 [this]{ openTermAt(App::dataLocation()); });
 
         rank_items.emplace_back(StandardItem::make(u"data"_s,
                                                    strings.data,
                                                    strings.datad,
                                                    makeIcon,
                                                    actions,
-                                                   buildPath(albert::dataLocation())),
+                                                   buildPath(App::dataLocation())),
                                 m);
     }
 

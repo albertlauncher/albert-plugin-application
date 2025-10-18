@@ -6,7 +6,7 @@
 #include <albert/plugin/applications.h>
 #include <albert/plugindependency.h>
 
-class Plugin : public albert::util::ExtensionPlugin,
+class Plugin : public albert::ExtensionPlugin,
                public albert::GlobalQueryHandler
 {
     ALBERT_PLUGIN
@@ -15,13 +15,13 @@ public:
     Plugin();
 
     QString defaultTrigger() const override;
-    std::vector<albert::RankItem> handleGlobalQuery(const albert::Query &) override;
+    std::vector<albert::RankItem> rankItems(albert::QueryContext &) override;
 
 private:
 
     void openTermAt(const std::filesystem::path &loc) const;
 
-    albert::util::StrongDependency<applications::Plugin> apps_plugin;
+    albert::StrongDependency<applications::Plugin> apps_plugin;
 
     struct {
         const QString cache;
