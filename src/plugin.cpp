@@ -2,7 +2,7 @@
 
 #include "plugin.h"
 #include <albert/app.h>
-#include <albert/iconutil.h>
+#include <albert/icon.h>
 #include <albert/logging.h>
 #include <albert/matcher.h>
 #include <albert/standarditem.h>
@@ -35,7 +35,7 @@ Plugin::Plugin():
 void Plugin::openTermAt(const std::filesystem::path &loc) const
 { apps_plugin->runTerminal("cd '%1'; exec $SHELL"_L1.arg(QString::fromLocal8Bit(loc.c_str()))); }
 
-static inline auto makeIcon() { return makeThemeIcon(u"albert"_s); }
+static inline auto makeIcon() { return Icon::theme(u"albert"_s); }
 
 static inline auto buildPath(const filesystem::path path)
 { return QString::fromLocal8Bit(path.native()) + u"/"_s; }
