@@ -37,6 +37,10 @@ void Plugin::openTermAt(const std::filesystem::path &loc) const
 
 static inline auto makeIcon() { return Icon::theme(u"albert"_s); }
 
+static inline auto makeDirIcon() {
+    return Icon::composed(Icon::standard(Icon::DirIcon), Icon::theme(u"albert"_s), 1., .7);
+}
+
 static inline auto buildPath(const filesystem::path path)
 { return QString::fromLocal8Bit(path.native()) + u"/"_s; }
 
@@ -86,7 +90,7 @@ vector<RankItem> Plugin::rankItems(QueryContext &ctx)
         rank_items.emplace_back(StandardItem::make(u"cache"_s,
                                                    strings.cache,
                                                    strings.cached,
-                                                   makeIcon,
+                                                   makeDirIcon,
                                                    actions,
                                                    buildPath(App::cacheLocation())),
                                 m);
@@ -102,7 +106,7 @@ vector<RankItem> Plugin::rankItems(QueryContext &ctx)
         rank_items.emplace_back(StandardItem::make(u"config"_s,
                                                    strings.config,
                                                    strings.configd,
-                                                   makeIcon,
+                                                   makeDirIcon,
                                                    actions,
                                                    buildPath(App::configLocation())),
                                 m);
@@ -118,7 +122,7 @@ vector<RankItem> Plugin::rankItems(QueryContext &ctx)
         rank_items.emplace_back(StandardItem::make(u"data"_s,
                                                    strings.data,
                                                    strings.datad,
-                                                   makeIcon,
+                                                   makeDirIcon,
                                                    actions,
                                                    buildPath(App::dataLocation())),
                                 m);
