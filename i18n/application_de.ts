@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>Albert cache location</source>
-        <translation>Albert Cache Verzeichnis</translation>
+        <translation>Albert Cacheverzeichnis</translation>
     </message>
     <message>
         <source>Config location</source>
