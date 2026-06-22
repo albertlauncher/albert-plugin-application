@@ -15,7 +15,7 @@ public:
     Plugin();
 
     QString defaultTrigger() const override;
-    std::vector<albert::RankItem> rankItems(albert::QueryContext &) override;
+    std::vector<albert::RankItem> rankItems(albert::QueryContext) override;
 
 private:
 

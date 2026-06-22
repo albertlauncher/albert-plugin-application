@@ -44,7 +44,7 @@ static inline auto makeDirIcon() {
 static inline auto buildPath(const filesystem::path path)
 { return QString::fromLocal8Bit(path.native()) + u"/"_s; }
 
-vector<RankItem> Plugin::rankItems(QueryContext &ctx)
+vector<RankItem> Plugin::rankItems(QueryContext ctx)
 {
     Matcher matcher(ctx);
     vector<RankItem> rank_items;
