@@ -57,7 +57,7 @@ vector<RankItem> Plugin::rankItems(QueryContext &ctx)
                                                    makeIcon,
                                                    {{"open"_L1,
                                                      strings.open,
-                                                     [] { App::instance().showSettings(); }}}),
+                                                     [] { app().showSettings(); }}}),
                                 m);
 
     if (m = matcher.match(strings.quit); m)
@@ -82,49 +82,49 @@ vector<RankItem> Plugin::rankItems(QueryContext &ctx)
 
     if (m = matcher.match(strings.cache); m)
     {
-        vector<Action> actions = {{"open"_L1, strings.open, [] { open(App::cacheLocation()); }}};
+        vector<Action> actions = {{"open"_L1, strings.open, [] { open(app().cacheLocation()); }}};
         if (apps_plugin)
             actions.emplace_back("term"_L1, strings.topen,
-                                 [this]{ openTermAt(App::cacheLocation()); });
+                                 [this]{ openTermAt(app().cacheLocation()); });
 
         rank_items.emplace_back(StandardItem::make(u"cache"_s,
                                                    strings.cache,
                                                    strings.cached,
                                                    makeDirIcon,
                                                    actions,
-                                                   buildPath(App::cacheLocation())),
+                                                   buildPath(app().cacheLocation())),
                                 m);
     }
 
     if (m = matcher.match(strings.config); m)
     {
-        vector<Action> actions = {{"open"_L1, strings.open, [] { open(App::configLocation()); }}};
+        vector<Action> actions = {{"open"_L1, strings.open, [] { open(app().configLocation()); }}};
         if (apps_plugin)
             actions.emplace_back("term"_L1, strings.topen,
-                                 [this]{ openTermAt(App::configLocation()); });
+                                 [this]{ openTermAt(app().configLocation()); });
 
         rank_items.emplace_back(StandardItem::make(u"config"_s,
                                                    strings.config,
                                                    strings.configd,
                                                    makeDirIcon,
                                                    actions,
-                                                   buildPath(App::configLocation())),
+                                                   buildPath(app().configLocation())),
                                 m);
     }
 
     if (m = matcher.match(strings.data); m)
     {
-        vector<Action> actions = {{"open"_L1, strings.open, [] { open(App::dataLocation()); }}};
+        vector<Action> actions = {{"open"_L1, strings.open, [] { open(app().dataLocation()); }}};
         if (apps_plugin)
             actions.emplace_back("term"_L1, strings.topen,
-                                 [this]{ openTermAt(App::dataLocation()); });
+                                 [this]{ openTermAt(app().dataLocation()); });
 
         rank_items.emplace_back(StandardItem::make(u"data"_s,
                                                    strings.data,
                                                    strings.datad,
                                                    makeDirIcon,
                                                    actions,
-                                                   buildPath(App::dataLocation())),
+                                                   buildPath(app().dataLocation())),
                                 m);
     }
 
